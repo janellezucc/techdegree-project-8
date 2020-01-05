@@ -92,8 +92,13 @@ h1 {
     align-items: center;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .tingle-modal-box__content div, h4{
     margin-bottom: 10px;
+}
+.tingle-modal-box__content div img {
+    display: block;
+    margin: auto;
 }

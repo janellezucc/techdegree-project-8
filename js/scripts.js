@@ -17,14 +17,17 @@ const userFragment = document.createDocumentFragment();
 
 fetchUsers().then(function(users) {
     users.map((user, index) => {
+        const formattedDate = new Date(user.dob.date);
+        const dateMonth = formattedDate.getMonth();
+        const dateDay = formattedDate.getDay();
+        const dateYear = formattedDate.getFullYear();
+
         const userColumn = document.createElement('div');
               userColumn.classList.add('column','user');
               userColumn.setAttribute('data-index', index);
               userColumn.onclick = function () {
                   const userIndex = this.getAttribute('data-index');
                   const userData = json.results[userIndex];
-
-                  console.log('userData', userData);
 
                   // instanciate new modal
                   var modal = new tingle.modal({
@@ -51,8 +54,8 @@ fetchUsers().then(function(users) {
                                   <div>${user.email}</div>
                                   <div>${user.cell}</div>
                                   <div>${user.location.street.number} ${user.location.street.name}</div>
-                                  <div>${user.location.city} ${user.location.state} ${user.location.postcode}</div>
-                                  <div>Birthday: ${user.dob.date}</div>
+                                  <div>${user.location.city}, ${user.location.state} ${user.location.postcode}</div>
+                                  <div>Birthday: ${dateMonth}/${dateDay}/${dateYear}</div>
                               </div>
                           </div>
                       </div>
@@ -94,7 +97,7 @@ fetchUsers().then(function(users) {
 
         const userProfileBirthday = document.createElement('div');
               userProfileBirthday.classList.add('user-profile-birthday');
-              userProfileBirthday.textContent = `${user.dob.date}`;
+              userProfileBirthday.textContent = `${dateMonth}/${dateDay}/${dateYear}`;
 
               userProfileInfo.appendChild(userProfileInfoName);
               userProfileInfo.appendChild(userProfileInfoEmail);
